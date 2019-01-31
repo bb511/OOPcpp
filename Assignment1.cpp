@@ -23,10 +23,10 @@ struct Transition{
 
 int readAtomicNumber(){
 	// Reads the atomic number and tests for valid input.
-	unsigned int Z;
+	int Z;
 	cout<<"Please input the atomic number (Z) of the atom:\n";
 	cin>>Z;
-	while(cin.fail() || Z == 0){
+	while(cin.fail() || Z <= 0){
 		cout<<"Sorry, your input was not valid, please try again:\n";
 		cout<<"The atomic number should be a non-zero positive integer.\n";
 		cin.clear(); cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -37,7 +37,7 @@ int readAtomicNumber(){
 
 int readInitialQuantumNumber(){
 	// Reads the initial quantum number and tests for valid input.
-	unsigned int nInitial;
+	int nInitial;
 	cout<<"Please input initial quantum number (nInitial) of the transition:\n";
 	cin>>nInitial;
 	while(cin.fail() || nInitial <= 1){
@@ -51,12 +51,12 @@ int readInitialQuantumNumber(){
 	return nInitial;
 }
 
-int readFinalQuantumNumber(unsigned int nInitial){
+int readFinalQuantumNumber(int nInitial){
 	// Reads the final quantum number and tests for valid input.
-	unsigned int nFinal;
+	int nFinal;
 	cout<<"Please input the final quantum number (nFinal) of the transition:\n";
 	cin>>nFinal;
-	while(cin.fail() || nFinal == 0 || (nInitial < nFinal)){
+	while(cin.fail() || nFinal <= 0 || (nInitial < nFinal)){
 		cout<<"Sorry, your input was not valid, please try again:\n";
 		cout<<"The final quantum number must be a non-zero positive integer "
 			  "that is lower than the initial quantum number. "
@@ -95,16 +95,16 @@ Transition readUserData(){
 	return transitionData;
 }
 
-float calculateEnergy(Transition transitionData){
+double calculateEnergy(Transition transitionData){
 	// Calculates the energy of the transition described by transitionData.
-	const float rydbergEnergy{13.6};
+	const double rydbergEnergy{13.6};
 	return rydbergEnergy*pow(transitionData.Z,2)*(1/pow(transitionData.nF,2) -
 		   1/pow(transitionData.nI, 2));
 }
 
-void outputFormattedEnergy(float energy, char energyUnits){
+void outputFormattedEnergy(double energy, char energyUnits){
 	// Formats and outputs the energy fo the transition.
-	const float elementaryCharge{1.602*pow(10,-19)};
+	const double elementaryCharge{1.602*pow(10,-19)};
 	cout<<"The energy of the transition is: ";
 	if(energyUnits == 'J')
 		cout<<setprecision(3)<<energy*elementaryCharge<<" J\n\n";
@@ -131,7 +131,7 @@ bool askForRepeat(){
 int main(){
 
 	Transition transitionData;
-	float energy;
+	double energy;
 	cout<<"Welcome to this simple single electron atom transition energy "
 		  "calculator. Valid inputs for atomic number, initial quantum number "
 		  "and final quantum number are non-zero positive integers. For the"
