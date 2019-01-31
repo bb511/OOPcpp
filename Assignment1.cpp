@@ -28,6 +28,7 @@ int readAtomicNumber(){
 	cin>>Z;
 	while(cin.fail() || Z == 0){
 		cout<<"Sorry, your input was not valid, please try again:\n";
+		cout<<"The atomic number should be a non-zero positive integer.\n";
 		cin.clear(); cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cin>>Z;
 	}
@@ -39,8 +40,11 @@ int readInitialQuantumNumber(){
 	unsigned int nInitial;
 	cout<<"Please input initial quantum number (nInitial) of the transition:\n";
 	cin>>nInitial;
-	while(cin.fail() || nInitial == 0){
-		cout<<"Sorry, your input was not valid, please try again:\n";
+	while(cin.fail() || nInitial <= 1){
+		cout<<"Sorry, your input was not valid.\n";
+		cout<<"The initial quantum number must be a non-zero positive integer. "
+			  "It also must not be one (no allowed transitions from 1). "
+			  "Please try again:\n";
 		cin.clear(); cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cin>>nInitial;
 	};
@@ -54,6 +58,9 @@ int readFinalQuantumNumber(unsigned int nInitial){
 	cin>>nFinal;
 	while(cin.fail() || nFinal == 0 || (nInitial < nFinal)){
 		cout<<"Sorry, your input was not valid, please try again:\n";
+		cout<<"The final quantum number must be a non-zero positive integer "
+			  "that is lower than the initial quantum number. "
+			  "Please try again:\n";
 		cin.clear(); cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cin>>nFinal;
 	}
@@ -67,6 +74,8 @@ int readDesiredFormat(){
 	cin>>energyUnits;
 	while(cin.fail() || (energyUnits != 'J' && energyUnits != 'e')){
 		cout<<"Sorry, your input was not valid, please try again:\n";
+		cout<<"The energy units can be either joules (input J) or electron "
+			  "volts (input e): ";
 		cin.clear(); cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cin>>energyUnits;
 	}
@@ -78,10 +87,6 @@ Transition readUserData(){
 	// transition he wants the energy calculated for.
 
 	Transition transitionData;
-	cout<<"Welcome to this simple single electron atom transition calculator. "
-		  "Valid inputs for atomic number, initial quantum number and final "
-		  "quantum number are non-zero positive integers. For the energy units, "
-		  "this tool offers either Joules or electron volts.\n";
 	transitionData.Z = readAtomicNumber();
 	transitionData.nI = readInitialQuantumNumber();
 	transitionData.nF = readFinalQuantumNumber(transitionData.nI);
@@ -100,39 +105,44 @@ float calculateEnergy(Transition transitionData){
 void outputFormattedEnergy(float energy, char energyUnits){
 	// Formats and outputs the energy fo the transition.
 	const float elementaryCharge{1.602*pow(10,-19)};
-	cout<<"The energy of the transition is: "<<setprecision(3);
+	cout<<"The energy of the transition is: ";
 	if(energyUnits == 'J')
-		cout<<energy*elementaryCharge<<" J\n\n";
+		cout<<setprecision(3)<<energy*elementaryCharge<<" J\n\n";
 	else
-		cout<<energy<<" eV\n\n";
+		cout<<setprecision(5)<<energy<<" eV\n\n";
 }
 
-char askForRepeat(char repeat){
+bool askForRepeat(){
 	// Asks if the user wants to repeat the calculation with a different input
 	// and checks if the input is valid.
+	char repeat;
 	cout<<"Would you like to repeat the calculation "
 	      "with a different input? (y/n)\n";
 	cin>>repeat;
 	while(repeat != 'y' && repeat != 'n'){
-		cout<<"Please enter either 'y' or 'n' (without the apostrophes) ";
+		cout<<"Please enter either 'y' or 'n' (without the apostrophes): ";
 		cin.clear(); cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cin>>repeat;
 	};
 
-	return repeat;
+	return repeat == 'n';
 }
 
 int main(){
 
 	Transition transitionData;
-	char repeat{'y'};
 	float energy;
+	cout<<"Welcome to this simple single electron atom transition energy "
+		  "calculator. Valid inputs for atomic number, initial quantum number "
+		  "and final quantum number are non-zero positive integers. For the"
+		  "energy units, this tool offers either Joules or electron volts.\n";
 
-	while(repeat != 'n'){
+	while(true){
 		transitionData = readUserData();
 		energy = calculateEnergy(transitionData);
 		outputFormattedEnergy(energy, transitionData.energyUnits);
-		repeat = askForRepeat(repeat);
+		if(askForRepeat())
+			break;
 	};
 
 	return 0;
