@@ -1,0 +1,95 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      2551,         87]
+NotebookOptionsPosition[      2096,         67]
+NotebookOutlinePosition[      2431,         82]
+CellTagsIndexPosition[      2388,         79]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{"SetDirectory", "[", 
+  RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Flatten", "[", 
+  RowBox[{"Import", "[", 
+   RowBox[{"\"\<millikan.dat\>\"", ",", "\"\<Data\>\""}], "]"}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.758618052421*^9, 3.758618053935133*^9}, {
+  3.758628365025783*^9, 3.758628395914435*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "SetDirectory","fstr",
+   "\"File specification \\!\\(\\*RowBox[{\\\"NotebookDirectory\\\"}]\\) is \
+not a string of one or more characters.\"",2,1,1,31564608438218141328,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.758628392834111*^9}],
+
+Cell[BoxData[
+ RowBox[{"SetDirectory", "[", "NotebookDirectory", "]"}]], "Output",
+ CellChangeTimes->{3.7586283928434362`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Import","nffil",
+   "\"File not found during \\!\\(\\*RowBox[{\\\"Import\\\"}]\\).\"",2,2,2,
+   31564608438218141328,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7586283928928967`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Flatten","normal",
+   "\"Nonatomic expression expected at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \\!\\(\\*RowBox[{\\\"Flatten\\\", \
+\\\"[\\\", \\\"$Failed\\\", \\\"]\\\"}]\\).\"",2,2,3,31564608438218141328,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.758628392901866*^9}],
+
+Cell[BoxData[
+ RowBox[{"Flatten", "[", "$Failed", "]"}]], "Output",
+ CellChangeTimes->{3.7586283929112988`*^9}]
+}, Open  ]]
+},
+WindowSize->{808, 911},
+WindowMargins->{{472, Automatic}, {33, Automatic}},
+FrontEndVersion->"11.0 for Linux x86 (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 369, 8, 59, "Input"],
+Cell[952, 32, 294, 6, 23, "Message"],
+Cell[1249, 40, 126, 2, 32, "Output"],
+Cell[1378, 44, 243, 6, 23, "Message"],
+Cell[1624, 52, 342, 8, 23, "Message"],
+Cell[1969, 62, 111, 2, 32, "Output"]
+}, Open  ]]
+}
+]
+*)
+
