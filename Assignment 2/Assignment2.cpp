@@ -80,6 +80,7 @@ int main(){
     double* data{readData(dataFile, pointsNumber)};
     double mean{computeMean(data)}; double STD{computeSTD(data, mean)};
     double STDE{STD/sqrt(pointsNumber)};
+
     cout<<"Mean: "<<mean<<endl; cout<<"STD: "<<STD<<endl;
     cout<<"Standard error in the mean: "<<STDE<<endl;
 }

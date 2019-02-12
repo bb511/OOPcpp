@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      2551,         87]
-NotebookOptionsPosition[      2096,         67]
-NotebookOutlinePosition[      2431,         82]
-CellTagsIndexPosition[      2388,         79]
+NotebookDataLength[      3111,         87]
+NotebookOptionsPosition[      2691,         68]
+NotebookOutlinePosition[      3026,         83]
+CellTagsIndexPosition[      2983,         80]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -23,46 +23,47 @@ Cell[CellGroupData[{
 Cell[BoxData[{
  RowBox[{"SetDirectory", "[", 
   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "\[IndentingNewLine]", 
- RowBox[{"Flatten", "[", 
-  RowBox[{"Import", "[", 
-   RowBox[{"\"\<millikan.dat\>\"", ",", "\"\<Data\>\""}], "]"}], 
-  "]"}]}], "Input",
+ RowBox[{"data", " ", "=", " ", 
+  RowBox[{"Flatten", "[", 
+   RowBox[{"Import", "[", 
+    RowBox[{"\"\<millikan.dat\>\"", ",", "\"\<Data\>\""}], "]"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Mean", "[", "data", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"StandardDeviation", "[", "data", "]"}]}], "Input",
  CellChangeTimes->{{3.758618052421*^9, 3.758618053935133*^9}, {
-  3.758628365025783*^9, 3.758628395914435*^9}}],
+  3.758628365025783*^9, 3.758628406977346*^9}, {3.758628571665413*^9, 
+  3.758628574167783*^9}}],
+
+Cell[BoxData["\<\"/home/patrick/OOPcpp/Assignment 2\"\>"], "Output",
+ CellChangeTimes->{{3.7586283928434362`*^9, 3.758628408553966*^9}, 
+   3.7586285747090483`*^9}],
 
 Cell[BoxData[
- TemplateBox[{
-  "SetDirectory","fstr",
-   "\"File specification \\!\\(\\*RowBox[{\\\"NotebookDirectory\\\"}]\\) is \
-not a string of one or more characters.\"",2,1,1,31564608438218141328,"Local"},
-  "MessageTemplate"]], "Message", "MSG",
- CellChangeTimes->{3.758628392834111*^9}],
+ RowBox[{"{", 
+  RowBox[{
+  "1.64638`", ",", "1.55023`", ",", "1.54612`", ",", "1.54004`", ",", 
+   "1.60666`", ",", "1.48665`", ",", "1.64324`", ",", "1.51259`", ",", 
+   "1.56718`", ",", "1.65898`", ",", "1.46271`", ",", "1.61033`", ",", 
+   "1.67845`", ",", "1.60833`", ",", "1.48771`", ",", "1.61548`", ",", 
+   "1.47745`", ",", "1.51166`", ",", "1.65934`", ",", "1.55124`", ",", 
+   "1.63349`", ",", "1.59141`", ",", "1.6452`", ",", "1.55601`", ",", 
+   "1.6383`", ",", "1.57711`", ",", "1.58464`", ",", "1.65309`", ",", 
+   "1.67066`", ",", "1.63383`", ",", "1.60722`", ",", "1.74772`", ",", 
+   "1.53712`", ",", "1.77965`", ",", "1.72866`", ",", "1.39334`", ",", 
+   "1.79338`", ",", "1.6213`", ",", "1.30483`", ",", "1.71398`", ",", 
+   "1.74054`", ",", "1.57716`", ",", "1.64926`", ",", "1.62492`", ",", 
+   "1.69285`", ",", "1.59722`", ",", "1.70241`", ",", "1.40685`", ",", 
+   "1.4692`", ",", "1.69859`"}], "}"}]], "Output",
+ CellChangeTimes->{{3.7586283928434362`*^9, 3.758628408553966*^9}, 
+   3.7586285747231693`*^9}],
 
-Cell[BoxData[
- RowBox[{"SetDirectory", "[", "NotebookDirectory", "]"}]], "Output",
- CellChangeTimes->{3.7586283928434362`*^9}],
+Cell[BoxData["1.5998142000000002`"], "Output",
+ CellChangeTimes->{{3.7586283928434362`*^9, 3.758628408553966*^9}, 
+   3.758628574724904*^9}],
 
-Cell[BoxData[
- TemplateBox[{
-  "Import","nffil",
-   "\"File not found during \\!\\(\\*RowBox[{\\\"Import\\\"}]\\).\"",2,2,2,
-   31564608438218141328,"Local"},
-  "MessageTemplate"]], "Message", "MSG",
- CellChangeTimes->{3.7586283928928967`*^9}],
-
-Cell[BoxData[
- TemplateBox[{
-  "Flatten","normal",
-   "\"Nonatomic expression expected at position \
-\\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \\!\\(\\*RowBox[{\\\"Flatten\\\", \
-\\\"[\\\", \\\"$Failed\\\", \\\"]\\\"}]\\).\"",2,2,3,31564608438218141328,
-   "Local"},
-  "MessageTemplate"]], "Message", "MSG",
- CellChangeTimes->{3.758628392901866*^9}],
-
-Cell[BoxData[
- RowBox[{"Flatten", "[", "$Failed", "]"}]], "Output",
- CellChangeTimes->{3.7586283929112988`*^9}]
+Cell[BoxData["0.09929246287629699`"], "Output",
+ CellChangeTimes->{{3.7586283928434362`*^9, 3.758628408553966*^9}, 
+   3.758628574734755*^9}]
 }, Open  ]]
 },
 WindowSize->{808, 911},
@@ -82,12 +83,11 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 369, 8, 59, "Input"],
-Cell[952, 32, 294, 6, 23, "Message"],
-Cell[1249, 40, 126, 2, 32, "Output"],
-Cell[1378, 44, 243, 6, 23, "Message"],
-Cell[1624, 52, 342, 8, 23, "Message"],
-Cell[1969, 62, 111, 2, 32, "Output"]
+Cell[580, 22, 592, 12, 100, "Input"],
+Cell[1175, 36, 164, 2, 32, "Output"],
+Cell[1342, 40, 1046, 17, 128, "Output"],
+Cell[2391, 59, 140, 2, 30, "Output"],
+Cell[2534, 63, 141, 2, 63, "Output"]
 }, Open  ]]
 }
 ]
