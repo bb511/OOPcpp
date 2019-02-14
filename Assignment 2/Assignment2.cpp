@@ -49,7 +49,7 @@ double readPoint(ifstream &dataFile){
     return dataPoint;
 }
 
-double* readData(ifstream &dataFile, unsigned int pointsNumber){
+double* readData(ifstream &dataFile, unsigned int pointsNumber, double data[]){
     // Reads the data and stores it in an array.
     unsigned int i{0}; double* data = new double[pointsNumber-1];
     if(data == nullptr) throw runtime_error("Error: memory could not be alloc");
@@ -77,8 +77,10 @@ int main(){
     string fileName; cout<<"Please give file name: "; cin>>fileName;
     ifstream dataFile{openFile(fileName)};
     unsigned pointsNumber{getNumberOfPoints(dataFile)};
-    double* data{readData(dataFile, pointsNumber)};
+    double* data = new double[pointsNumber];
+    readData(dataFile, pointsNumber, data);
     double mean{computeMean(data)}; double STD{computeSTD(data, mean)};
+    delete[] data;
     double STDE{STD/sqrt(pointsNumber)};
 
     cout<<"Mean: "<<mean<<endl; cout<<"STD: "<<STD<<endl;
