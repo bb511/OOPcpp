@@ -4,24 +4,27 @@ Author: Patrick Odagiu
 
 This simple program does blah.
 */
-#include "Assignment 4.h"
-#include "Checks.h"
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cstring>
+#include <tuple>
+#include <algorithm>
 
-void galaxy::printData(){
+#include "Galaxy.h"
+#include "Checks.h"
+#include "Menu.h"
+
+using namespace std;
+
+void galaxy::printGalaxy(){
     // Prints out the data associated with a galaxy object.
     cout.precision(3);
     cout<<"Hubble type: "<<hubbleType<<endl;
     cout<<"Redshift: "<<redShift<<endl;
     cout<<"Total mass: "<<totalMass<<endl;
     cout<<"Stellar mass fraction: "<<stellarMassFrac<<endl;
-}
-
-void greetingsInstructions(){
-    // Displays a greeting to the user and provides some instructions.
-    cout<<"Welcome to this simple galaxy storer.\n";
-    cout<<"First, please provide, on one line, the Hubble type, redshift, "
-          "total mass, and stellar mass fraction for your galaxy (or galaxies).\n";
-    cout<<"To exit the data input phase please type \"stop\".\n";
+    cout<<"Number of satellites: "<<satellites.size()<<endl;
 }
 
 tuple<string, double, double, double> getUserInput(){
@@ -33,18 +36,46 @@ tuple<string, double, double, double> getUserInput(){
     return make_tuple(hubbleType, redShift, totalMass, stellarMassFrac);
 }
 
+void storeGalaxy(vector<galaxy> &galaxyList, auto uIn){
+    try{galaxyList.push_back(
+        galaxy(get<0>(uIn), get<1>(uIn), get<2>(uIn), get<3>(uIn)));
+        cout<<"Galaxy stored!\n";}
+    catch(const exception& e){
+        cout<<e.what(); cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');}
+}
+
 void populateGalaxies(vector<galaxy> &galaxyList){
     while(true){
-        auto uIn = getUserInput();
-        if (!get<0>(uIn).compare("stop")) break;
-
-        try{galaxyList.push_back(
-            galaxy(get<0>(uIn), get<1>(uIn), get<2>(uIn), get<3>(uIn)));
-            cout<<"Galaxy was stored in vector!\n";}
-        catch(const exception& e){
-            cout<<e.what(); cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');}
+        auto userInput = getUserInput();
+        if (!get<0>(userInput).compare("stop")) {cout<<endl; break;}
+        storeGalaxy(galaxyList, userInput);
     }
+}
+
+void storeSatellite(vector<galaxy>::iterator &chosenGalaxy, auto uIn){
+    try{chosenGalaxy->addSatellite(
+        galaxy(get<0>(uIn), get<1>(uIn), get<2>(uIn), get<3>(uIn)));
+        cout<<"Satellite stored!\n";}
+    catch(const exception& e){
+        cout<<e.what(); cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');}
+}
+
+void populateSatellites(vector<galaxy> &galaxyList){
+    auto chosenGalaxy{selectGalaxy(galaxyList)};
+    while(true){
+        auto userInput = getUserInput();
+        if (!get<0>(userInput).compare("stop")) break;
+        storeSatellite(chosenGalaxy, userInput);
+    }
+}
+
+bool checkAnotherChoice(){
+    cout<<"Would you like to add satellites to any other galaxy?(y/n)\n";
+    char choice; cin>>choice;
+    if(choice == 'y') return true;
+    return false;
 }
 
 int main()
@@ -52,5 +83,9 @@ int main()
     vector<galaxy> galaxyList;
     greetingsInstructions();
     populateGalaxies(galaxyList);
+    displayGalaxies(galaxyList);
+    cout<<"Choose galaxy and give its satellites and say stop for stopping!\n";
+    do{populateSatellites(galaxyList);} while(checkAnotherChoice());
+    while(mainMenu(galaxyList));
     return 0;
 }

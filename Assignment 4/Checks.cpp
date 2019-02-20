@@ -1,5 +1,5 @@
 #include "Checks.h"
-#include "Assignment 4.h"
+#include "Galaxy.h"
 using namespace std;
 
 void galaxy::invalidInput(){
