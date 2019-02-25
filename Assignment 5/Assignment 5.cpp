@@ -1,3 +1,10 @@
+/*
+Author: Denis-Patrick Odagiu
+Title: Assignment 5
+
+Simple program that stores (inputted) complex numbers in a vector and
+allows the user to manipulate these in various ways.
+*/
 #include "Assignment 5.h"
 #include "Complex.h"
 #include "Menu.h"
@@ -13,6 +20,7 @@ complex getUserInput(){
 }
 
 void populateNumbers(vector<complex> &numberList){
+    // Fills a complex number vector with numbers inputted by the user.
     complex uIn;
     while(true){
         try{ uIn = getUserInput(); }

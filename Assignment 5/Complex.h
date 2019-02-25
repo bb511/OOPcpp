@@ -1,5 +1,6 @@
 #ifndef COMPLEX_H
 #define COMPLEX_H
+#define _USE_MATH_DEFINES
 
 #include <iostream>
 #include <string>

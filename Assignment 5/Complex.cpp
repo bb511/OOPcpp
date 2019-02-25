@@ -22,12 +22,14 @@ const complex complex::conjugate() const{
 }
 
 ostream & operator<<(ostream &os, const complex &z){
+    // Modify the operator to output complex numbers properly.
     if(z.imagPart >= 0) os<<z.realPart<<"+"<<z.imagPart<<"i";
     else os<<z.realPart<<z.imagPart<<"i";
     return os;
 }
 
 istream & operator>>(istream &is, complex &z){
+    // Modify operator to input complex numbers properly.
     is>>z.realPart>>z.imagPart;
     return is;
 }

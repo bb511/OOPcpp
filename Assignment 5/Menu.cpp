@@ -4,6 +4,7 @@
 using namespace std;
 
 void greetingsInstructions(){
+    // Output some greetings to the users and instructions on how to proceed.
     cout<<"Hello and welcome to this simple complex number program.\n";
     cout<<"Please input, on one line, the real part followed by the imaginary ";
     cout<<"part of a complex number.\n";
@@ -11,6 +12,7 @@ void greetingsInstructions(){
 }
 
 void mainMenuInstructions(){
+    // Output main menu instructions.
     cout<<"\nPlease type the corresponding number to select an option.\n";
     cout<<"1. Show all complex numbers you introduced.\n";
     cout<<"2. Select a complex number and display further options.\n";
@@ -19,6 +21,7 @@ void mainMenuInstructions(){
 }
 
 void selectOneInstructions(){
+    // Output menu instructions if the user selected 2.
     cout<<"\nPlease choose how to manipulate the complex number you selected.\n";
     cout<<"1. Display real part.\n";
     cout<<"2. Display imaginary part.\n";
@@ -29,6 +32,7 @@ void selectOneInstructions(){
 }
 
 void selectMultipleInstructions(){
+    // Output menu instructions if the user selected 3.
     cout<<"\nPlease choose how to manipulate the complex number you selected.\n";
     cout<<"1. Add the numbers and display result.\n";
     cout<<"2. Subtract two numbers and display result.\n";
@@ -38,6 +42,7 @@ void selectMultipleInstructions(){
 }
 
 bool selectOneMenu(vector<complex> numberList){
+    // Sub menu if user selects 2 in main menu.
     displayNumbers(numberList);
     complex chosenNumber{selectNumber(numberList)};
     selectOneInstructions(); size_t option;
@@ -56,6 +61,7 @@ bool selectOneMenu(vector<complex> numberList){
 }
 
 bool selectMultipleMenu(vector<complex> numberList){
+    // Sub menu if user selects 3 in main menu.
     vector<complex> subNumberList{selectNumbers(numberList)};
     cout<<"\n\nYou have selected:"; displayNumbers(subNumberList);
     selectMultipleInstructions(); size_t option;
@@ -75,6 +81,7 @@ bool selectMultipleMenu(vector<complex> numberList){
 
 
 bool mainMenu(vector<complex> numberList){
+    // Main menu of the program.
     mainMenuInstructions();
     size_t option; cin>>option;
     switch(option){
