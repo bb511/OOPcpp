@@ -40,7 +40,7 @@ void addNumbers(vector<complex> numberList){
 void subtractNumbers(vector<complex> numberList){
     // Select two numbers from a list of complex numbers and subtract them.
     displayNumbers(numberList);
-    cout<<"Please select the first and second numbers.\n";
+    cout<<"Please select the first and second number you want to subtract.\n";
     complex firstChoice{selectNumber(numberList)};
     complex secondChoice{selectNumber(numberList)};
     complex difference{firstChoice - secondChoice};
@@ -55,8 +55,8 @@ void multiplyNumbers(vector<complex> numberList){
 }
 void divideNumbers(vector<complex> numberList){
     // Select two numbers from a list of complex numbers and divide them.
-    cout<<"Please select the first number\n";
     displayNumbers(numberList);
+    cout<<"Please select the first and second number you want to divide.\n";
     complex firstChoice{selectNumber(numberList)};
     complex secondChoice{selectNumber(numberList)};
     complex ratio{firstChoice - secondChoice};
