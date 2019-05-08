@@ -1,0 +1,144 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+% Awesome CV LaTeX Template for Cover Letter
+%
+% This template has been downloaded from:
+% https://github.com/posquit0/Awesome-CV
+%
+% Authors:
+% Claud D. Park <posquit0.bj@gmail.com>
+% Lars Richter <mail@ayeks.de>
+%
+% Template license:
+% CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
+%
+
+
+%-------------------------------------------------------------------------------
+% CONFIGURATIONS
+%-------------------------------------------------------------------------------
+% A4 paper size by default, use 'letterpaper' for US letter
+\documentclass[11pt, a4paper]{awesome-cv}
+
+% Configure page margins with geometry
+\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
+
+% Specify the location of the included fonts
+\fontdir[fonts/]
+
+% Color for highlights
+% Awesome Colors: awesome-emerald, awesome-skyblue, awesome-red, awesome-pink, awesome-orange
+%                 awesome-nephritis, awesome-concrete, awesome-darknight
+\colorlet{awesome}{awesome-red}
+% Uncomment if you would like to specify your own color
+\definecolor{awesome}{HTML}{1F407A}
+
+% Colors for text
+% Uncomment if you would like to specify your own color
+\definecolor{darktext}{HTML}{1F407A}
+\definecolor{text}{HTML}{252222}
+\definecolor{graytext}{HTML}{353535}
+\definecolor{lighttext}{HTML}{414141}
+
+% Set false if you don't want to highlight section with awesome color
+\setbool{acvSectionColorHighlight}{true}
+% If you would like to change the social information separator from a pipe (|) to something else
+\renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
+
+
+%-------------------------------------------------------------------------------
+%	PERSONAL INFORMATION
+%	Comment any of the lines below if they are not required
+%-------------------------------------------------------------------------------
+% Available options: circle|rectangle,edge/noedge,left/right
+\name{}{C++ Final Project Proposal}
+%\position{Software Architect{\enskip\cdotp\enskip}Security Expert}
+\address{Denis-Patrick Odagiu}
+
+%\mobile{(+44) 7591 597 186}
+\email{denis-patrick.odagiu@student.manchester.ac.uk}
+%\homepage{www.posquit0.com}
+\github{github.com/bb511}
+%\linkedin{posquit0}
+% \gitlab{gitlab-id}
+% \stackoverflow{SO-id}{SO-name}
+% \twitter{@twit}
+% \skype{skype-id}
+% \reddit{reddit-id}
+% \extrainfo{extra informations}
+
+\quote{~~~}
+
+
+%-------------------------------------------------------------------------------
+%	LETTER INFORMATION
+%	All of the below lines must be filled out
+%-------------------------------------------------------------------------------
+% The company being applied to
+\recipient
+  {Text Based Adventure Game}
+  {~}
+% The date on the letter, default is the date of compilation
+\letterdate{~}
+% The title of the letter
+\lettertitle{~~~}
+% How the letter is opened
+\letteropening{~~}
+% How the letter is closed
+\letterclosing{Sincerely,}
+% Any enclosures with the letter
+%\letterenclosure[Attached]{Curriculum Vitae}
+
+
+%-------------------------------------------------------------------------------
+\begin{document}
+
+% Print the header with above personal informations
+% Give optional argument to change alignment(C: center, L: left, R: right)
+\makecvheader[L]
+
+% Print the footer with 3 arguments(<left>, <center>, <right>)
+% Leave any of these blank if they are not needed
+\makecvfooter
+  {\today}
+  {Denis-Patrick Odagiu~~~·~~~C++ Final Project Proposal}
+  {}
+
+% Print the title with above letter informations
+\makelettertitle
+
+%-------------------------------------------------------------------------------
+%	LETTER CONTENT
+%-------------------------------------------------------------------------------
+\begin{cvletter}
+\vspace{-2.5em}
+\lettersection{Brief Description}
+The project will be a short action adventure game in which the player must escape a prison. At the start of the game, the main (playable) character is spawned inside a cell. Then, one out of three possible random events occur, making the escape possible. Each such event sets the player on a distinct path for the rest of the game, where he must face different challenges to escape. All paths converge at the end of the game into a final battle. However, the paths might intertwine at various points during the game.
+
+In his attempts to escape, the player can interact with different objects which might aid or hinder him. For example, the player might start with a rusty spoon in his inventory, which he may use in a number of ways, such as causing noise by striking it against the cell bars or silently starting to dig an ambitious escape tunnel. Current choices will influence what kind of challenges and choices the player will have to face next. Therefore, the game will be relatively short, but very replayable.
+
+\lettersection{Used C++ Features}
+By default, the game will use a main character class. Furthermore, each object will be part of a class hierarchy, depending on its use. For example, the spoon might inherit from a class called 'kitchenUtensils' which inherits from an abstract base class named 'escapeTools'. The game will also use random number generators (for the starting scenario), error detection/exception handling (to prohibit restricted player actions), lambda functions, templates (to improve code readability and functionality) and dynamic memory allocation (player inventory). The output might contain some ascii art while the input will determine character actions in a simple but interesting way.
+
+\lettersection{Minimal Layout}
+Minimum class design specification:
+\begin{itemize}
+\item Abstract base classes for escape items, utility items and weapons. Derived classes for each item present in the game. Pure virtual functions that allow the basic moves with a certain type of item.
+\item Abstract character class with pure virtual function to allow basic movement. Inventory class with dynamic storage.
+\item Player class that inherits from both. Final boss class derived from character class.
+\end{itemize}
+
+Minimum functionality:
+\begin{itemize}
+\item Allowed actions for each item and the player.
+\item Input function that allows the player to make choices. Output function that shows inventory, what each item does and that displays current possible options to the player.
+\end{itemize}
+
+
+\end{cvletter}
+
+
+%-------------------------------------------------------------------------------
+% Print the signature and enclosures with above letter informations
+
+\end{document}
