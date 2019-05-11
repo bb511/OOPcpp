@@ -11,10 +11,11 @@ public:
     Gman(std::string nm, size_t h, double t): Character(nm, h, t) {}
     ~Gman() {}
 
-    void showCharacter();
+    std::string charAscii();
     std::string lineIntro();
     std::string lineIntro2();
     std::string lineFinal();
+	std::string linePlayer();
     bool takeDamage() { return false; }
 };
 
@@ -25,10 +26,13 @@ public:
         Character(nm, h, t, itm) {}
     ~Guard() {}
 
-    void showCharacter();
+    std::string charAscii(bool type);
     std::string lineAlerted();
+	std::string lineConfused();
+	std::string lineLeave();
     std::string lineCooperation();
-    std::string lineWrongPath();
+	std::string lineKnife();
+	std::string lineFinal();
 };
 
 #endif

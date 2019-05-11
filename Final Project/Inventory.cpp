@@ -31,24 +31,26 @@ Inventory& Inventory::operator=(Inventory&& inv){
     return *this;
 }
 
+bool Inventory::checkForItem(std::string itemName){
+	inventoryMap::iterator it;
+	it = items.find(itemName);
+	if (it != items.end())
+		return true;
+	return false;
+}
+
 bool Inventory::pickItem(Item* itm){
     bool fullInventory(items.size() >= 2);
-    if(fullInventory) { std::cout<<"Sorry, inventory is full!"; return false; }
-    else items[itm->getName()] = itm;
+    if(fullInventory) return false;
+	else items[itm->getName()] = itm->Clone();
     return true;
 }
 
-void Inventory::dropItem(const std::string itmName){
-    try{ items.erase(itmName); std::cout<<"Item dropped!\n"; }
+bool Inventory::dropItem(const std::string itmName){
+	try{ items.erase(itmName); return true; }
     catch(const std::exception& e){
-        std::cout<<"You selected to drop an inexistent item somehow!\n";
+        return false;
     }
-}
-
-std::ostream & operator<<(std::ostream &os, Inventory& inv){
-    for(auto itr = inv.begin(); itr != inv.end(); itr++)
-        os<<itr->second->getIcon()<<'\t';
-    return os;
 }
 
 

@@ -33,12 +33,11 @@ public:
     inventoryMap getItems() const { return items; }
     inventoryMap::iterator begin() { return items.begin(); }
     inventoryMap::iterator end() { return items.end(); }
+	bool checkForItem(std::string itemName);
 
     // Functionality.
     bool pickItem(Item* itm);
-    void dropItem(const std::string itmName);
-
-    friend std::ostream & operator<<(std::ostream &os, const Inventory &inv);
+    bool dropItem(const std::string itmName);
 };
 
 #endif

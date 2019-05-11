@@ -11,30 +11,31 @@ class Item{
 protected:
     str itemName;
     str asciiArt;
-    str iconAsciiArt;
 public:
     // Constructors and destructors.
-    Item(): asciiArt("Empty"), iconAsciiArt("Empty"), itemName("None") {}
-    Item(str name, str aArt, str iconAArt):
-        itemName(name), asciiArt(aArt), iconAsciiArt(iconAArt) {}
+    Item(): asciiArt("Empty"),  itemName("None") {}
+    Item(str name, str aArt): itemName(name), asciiArt(aArt) {}
+	virtual Item* Clone() const = 0;
     virtual ~Item() {}
 
     // Functionality.
-    virtual double attack(double)=0;
+    virtual size_t attack(double)=0;
     virtual bool pryOpen(double)=0;
-    virtual str itemType()=0;
 
     void changeName(str name) { itemName = name; }
     void changeAsciiArt(str aArt) { asciiArt = aArt; }
-    void changeIcon(str iconAArt) { iconAsciiArt = iconAArt; }
+	virtual void changeDmgDealt(size_t dmg) {}
+	virtual void changeSMulti(double success) {}
 
     // Access functions.
     str getName() { return itemName; }
     str getAscii() { return asciiArt; }
-    str getIcon() { return iconAsciiArt; }
-    void showName() { std::cout<<itemName; }
+    
+	virtual size_t getDmgDealt() { return 0; };
+	virtual double getSMulti() { return 1; }
+	void showName() { std::cout << itemName; }
     void showAscii() { std::cout<<asciiArt; }
-    void showIcon() { std::cout<<iconAsciiArt; }
+	
 };
 
 class DamageItem: public Item{
@@ -42,13 +43,14 @@ protected:
     size_t damageDealt;
 public:
     DamageItem(): Item(), damageDealt(0) {}
-    DamageItem(str name, str aArt, str iconAArt, size_t damage):
-        Item(name, aArt, iconAArt) { damageDealt = damage; }
+    DamageItem(str name, str aArt, size_t damage):
+        Item(name, aArt) { damageDealt = damage; }
+	virtual DamageItem* Clone() const { return new DamageItem(*this); }
     virtual ~DamageItem() {}
     virtual bool pryOpen(double);
-    double attack(double);
-    size_t getDamageDealt() { return damageDealt; }
-    str itemType() { return "damage"; }
+    size_t attack(double);
+	void changeDamageDealt(size_t dmg) { damageDealt = dmg; }
+    size_t getDmgDealt() { return damageDealt; }
 };
 
 class UtilityItem: public Item{
@@ -56,13 +58,14 @@ protected:
     double successMultiplier;
 public:
     UtilityItem(): Item(), successMultiplier(0) {}
-    UtilityItem(str name, str aArt, str iconAArt, double success):
-        Item(name, aArt, iconAArt) { successMultiplier = success; }
+    UtilityItem(str name, str aArt, double success):
+        Item(name, aArt) { successMultiplier = success; }
+	virtual UtilityItem* Clone() const { return new UtilityItem(*this); }
     virtual ~UtilityItem() {}
-    virtual double attack(double);
+    virtual size_t attack(double);
     bool pryOpen(double);
+	void changeSMulti(double s) { successMultiplier = s; }
     double getSuccessMultiplier() { return successMultiplier; }
-    str itemType() { return "utility"; }
 };
 
 #endif

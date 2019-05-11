@@ -6,24 +6,25 @@
 #include <stdint.h>
 #include <stdexcept>
 
-const size_t inputsNeurons{784}; // 28x28 images.
-const size_t hiddenNeurons{30};  // 30 hidden neurons (optimal number).
-const size_t outputNeurons{10};  // 10 output neurons (corresponding to digit).
+static const size_t inputsNeurons{784}; // 28x28 images.
+static const size_t hiddenNeurons{30};  // 30 hidden neurons (optimal number).
+static const size_t outputNeurons{10};  // 10 output neurons (0-9).
 
 // Set how many training epochs, the training data batch size and
-// the learning rate (optimal is around 3).
-const size_t trainingEpochs{30};
-const size_t batchSize{10};
-const double learningRate{3.0};
+// the learning rate (optimal is about 3).
+static const size_t trainingEpochs{30};
+static const size_t batchSize{10};
+static const double learningRate{3.0};
 
 // Initialize the neural network.
 NeuralNetwork<inputsNeurons, hiddenNeurons, outputNeurons> neuralNet;
 
 double assessAccuracy(const MNISTData& data){
-    // Asses the current accuracy of the neural network with respect to data.
+    // Assess the current accuracy of the neural network with respect to data.
     size_t correctItems{0};
     uint8_t label, deducedLabel;
     const double* pixels;
+
     for(size_t i=0; i<data.imagesNumber(); i++){
         pixels = data.getImage(i, label);
         uint8_t deducedLabel = neuralNet.forwardPass(pixels);
@@ -40,7 +41,8 @@ void dispEpochAccuracy(const MNISTData& trainingData, const MNISTData& testData)
     std::cout<<"Test Data Accuracy: "<<100.0*accuracyTest<<"%. ";
 }
 
-void trainOneEpoch(const MNISTData& trData, const MNISTData& tstData, size_t epoch){
+void trainOneEpoch(const MNISTData& trData, const MNISTData& tstData,
+                   size_t epoch){
     std::cout<<"Epoch "<<epoch+1<<": ";
     dispEpochAccuracy(trData, tstData);
     neuralNet.train(trData, batchSize, learningRate);
@@ -51,7 +53,7 @@ int main(){
     // Load the data.
     MNISTData trainingData; MNISTData testData;
     if(!(trainingData.load(true) && testData.load(false)))
-        throw std::runtime_error("Could not load training data files correctly!");
+        throw std::runtime_error("Could not load train data files correctly!");
 
     // Train the neural network.
     for(size_t epoch=0; epoch<trainingEpochs; epoch++)

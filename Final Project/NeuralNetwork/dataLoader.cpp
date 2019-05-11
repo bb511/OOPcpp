@@ -5,7 +5,8 @@
 
 inline uint32_t endianSwap (uint32_t x){
     // Manually implemented endian swap.
-    return (x<<24) | ((x<<8) & 0x00ff0000) | ((x>>8) & 0x0000ff00) | (x>>24);
+    return (x<<24) | ((x<<8) & 0x00ff0000) |
+           ((x>>8) & 0x0000ff00) | (x>>24);
 }
 
 bool MNISTData::checkOpenFile(FILE* file){

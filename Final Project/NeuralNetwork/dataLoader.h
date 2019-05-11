@@ -12,7 +12,7 @@
 class MNISTData{
 private:
     size_t imageCount;
-    // Because of the nature of the data, chose to stick with uint_8 type.
+    // The nature of the data dictates these unconventional types.
     uint8_t* labelData; uint8_t* imageData;
     uint8_t* labels; uint8_t* pixels;
     std::vector<double> imagePixels;

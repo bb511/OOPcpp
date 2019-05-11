@@ -2,12 +2,12 @@
 #define ENVIRONMENT_H
 
 #include <iostream>
+#include <string>
 
-class Environment{
-private:
-    size_t playNumber;
-public:
-    void cellDoorOpen();
-    void cellDoorClosed();
-};
+std::string cellDoorOpen();
+std::string cellDoorClosed();
+std::string corridor();
+std::string kitchen();
+std::string locker();
+
 #endif

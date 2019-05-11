@@ -4,19 +4,11 @@
 #include "ItemTypes.h"
 #include <string>
 
-
-class Spoon: public UtilityItem{
-public:
-    Spoon(): UtilityItem() {}
-    Spoon(double successMultiplier);
-    ~Spoon() {}
-};
-
 class Crowbar: public UtilityItem{
 public:
     Crowbar(): UtilityItem() {}
     Crowbar(double successMultiplier);
-    double attack(double);
+    size_t attack(double);
     ~Crowbar() {}
 };
 

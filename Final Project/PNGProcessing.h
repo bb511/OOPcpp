@@ -29,7 +29,7 @@ public:
     unsigned getHeight() const { return height; }
     std::vector<unsigned char> getImage() const { return image; }
     std::vector<double> getImageGreyScale() const { return imageGreyScale; }
-    const double* getGreyScalePointer() { return &imageGreyScale[0]; }
+    const double* getGreyScalePointer(size_t i) { return &imageGreyScale[i]; }
     void showGreyScaleImage();
 };
 
