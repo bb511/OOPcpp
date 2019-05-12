@@ -2,8 +2,9 @@
 #define GMAN_H
 
 #include "Character.h"
-#include <string>
 #include <iostream>
+#include <string>
+
 
 class Gman: public Character{
 public:

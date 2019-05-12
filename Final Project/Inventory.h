@@ -1,12 +1,11 @@
 #ifndef INVENTORY_H
 #define INVENTORY_H
 
-#include "ItemTypes.h"
+#include "ItemsAbstract.h"
 #include <iostream>
 #include <map>
 #include <string>
 #include <utility>
-#include <memory>
 #include <stdexcept>
 
 typedef std::map<std::string, Item*> inventoryMap;
@@ -19,13 +18,7 @@ public:
     Inventory() {}
     Inventory(Item* itm1);
     Inventory(Item* itm1, Item* itm2);
-    Inventory(Inventory&);
-    Inventory(Inventory&&);
     ~Inventory() {}
-
-    // Assignment and copy operators.
-    Inventory& operator=(Inventory& inv);
-    Inventory& operator=(Inventory&& inv);
 
     // Access functions.
     Item* operator[](std::string itmName) { return items[itmName]; }

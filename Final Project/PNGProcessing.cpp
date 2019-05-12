@@ -1,4 +1,5 @@
-// Functions that deal with the image processing in the main script.
+// Methods that deal with the png image processing required in main.
+// For the demonstration of the neural network in action.
 #include "PNGProcessing.h"
 #include "lodepng.h"
 

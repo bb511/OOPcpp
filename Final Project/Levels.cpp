@@ -1,5 +1,12 @@
 #include "Levels.h"
-char spawnOptions(std::string environment, size_t paddH, size_t paddW, strVect choices){
+#include "Utility.h"
+#include "Enemies.h"
+#include "Environment.h"
+#include "Items.h"
+
+char spawnOptions(std::string environment, size_t paddH, size_t paddW,
+				  strVect choices){
+
 	clearScreen();
 	displayCentredObject(environment, paddH, paddW);
 	displayChoices(choices);
@@ -7,14 +14,20 @@ char spawnOptions(std::string environment, size_t paddH, size_t paddW, strVect c
 }
 
 void findItem(Character* player, Item* itm){
+
 	clearScreen();
 	if (!(player->charInv.checkForItem(itm->getName()))){
 		displayCentredObject(itm->getAscii(), -5, 10);
 		displayCentredText("You found a " + itm->getName(), -10, true);
 		displayCentredText("Pick up item.", 2, false);
 		displayCentredText("Leave item.", 3, false);
-		char choice{ char(_getch()) };
-		if (choice == '1') player->charInv.pickItem(itm);
+
+		char choice{_getch()};
+		if (choice == '1')
+			if(!player->charInv.pickItem(itm)){
+				clearScreen();
+				displayCentredText("Your inventory is full!", 0, false);
+			}
 	}
 	else{
 		displayCentredText("You find nothing!", 0, false);
@@ -23,20 +36,23 @@ void findItem(Character* player, Item* itm){
 }
 
 bool checkForCellGuard(strVect &choices, Character* guard){
-	if (std::find(choices.begin(), choices.end(), "Attack guard") != choices.end()
-		&& guard->getHealth() > 0) return true;
+
+	if (std::find(choices.begin(), choices.end(), "Attack guard") !=
+		choices.end() && guard->getHealth() > 0)
+		return true;
 	return false;
 }
 
 bool cellLevel(Character* player, Character* guard){
-	size_t waitCounter{ 0 }; strVect choices;
-	size_t angry;
+
+	size_t waitCounter{0}, angry;
+	strVect choices;
 	choices = { "Search cell.", "Scream for help.", "Leave cell.", "Wait." };
 	while (true){
 		switch (spawnOptions(cellDoorOpen(), 14, 8, choices)){
 		case '1': findItem(player, &Pen(3)); break;
 		case '2': screamHelp(choices, guard); break;
-		case '3': if (leaveCell(choices, guard)) return false; break;
+		case '3': if (leaveCell(choices, guard)) return true; break;
 		case '4': waitCounter++;  break;
 		case '5': attackGuard(choices, player, guard, angry); break;
 		default: break;
@@ -44,14 +60,16 @@ bool cellLevel(Character* player, Character* guard){
 		if (player->getHealth() <= 0) dead();
 		if (waitCounter >= 10 && guard->getHealth() > 0) happyEnd(guard);
 	}
+	return false;
 }
 
-void screamHelp(strVect &choices, Character* guard){
+void screamHelp(strVect &cho, Character* guard){
 	clearScreen();
-	if (std::find(choices.begin(), choices.end(), "Attack guard") == choices.end()){
+	if (std::find(cho.begin(), cho.end(), "Attack guard") == cho.end()){
+
 		displayCentredObject(guard->charAscii(false), 0, 0);
 		displayCentredText(guard->lineAlerted(), 0, true);
-		choices.push_back("Attack guard");
+		cho.push_back("Attack guard");
 	}
 	else if (guard->getHealth() > 0){
 		displayCentredObject(guard->charAscii(false), 0, 0);
@@ -73,7 +91,8 @@ bool leaveCell(strVect &choices, Character* guard){
 	return true;
 }
 
-void attackGuard(strVect &choices, Character* player, Character* guard, size_t &angry){
+void attackGuard(strVect &choices, Character* player, Character* guard,
+				 size_t &angry){
 	clearScreen();
 	if (checkForCellGuard(choices, guard))
 		if (player->dealDamage(player->charInv["Pen"], guard) == 1)
@@ -91,10 +110,10 @@ void attackGuard(strVect &choices, Character* player, Character* guard, size_t &
 void guardRiposte(Character* guard, Character* player, size_t angry){
 	if (angry >= 3){
 		displayCentredText("The guard shoots at you!", 7, false);
-		int guardRip{ guard->dealDamage(guard->charInv["Pistol"], player) };
-		if (guardRip == 1)
+		int guardAtk{guard->dealDamage(guard->charInv["Pistol"], player)};
+		if (guardAtk == 1)
 			displayCentredText("And kills you!", 8, false);
-		else if (guardRip == 0)
+		else if (guardAtk == 0)
 			displayCentredText("And hits you!", 8, false);
 		else
 			displayCentredText("And misses you!", 8, false);
@@ -112,14 +131,15 @@ bool corridorLevel(Character* player){
 	choices = { "Move forward.", "Go through ventilation unit.", "Wait." };
 	while (true){
 		switch (spawnOptions(corridor(), 0, 5, choices)){
-		case '1': return false;
-		case '2': return true;
-		case '3': waitCounter++;
-		default: break;
+			case '1': return true;
+			case '2': ventInitial(); return true;
+			case '3': waitCounter++;
+			default: break;
 		}
 		if (waitCounter == 3) hearPatrol();
 		if (waitCounter == 5) getCaughtEnd();
 	}
+	return false;
 }
 
 void hearPatrol(){
@@ -130,14 +150,15 @@ void hearPatrol(){
 
 void ventInitial(){
 	clearScreen();
-	displayCentredText("As you crawl through, you notice a locked exit.", 0, true);
+	displayCentredText("As you crawl through, you notice a locked exit.",
+					   0, true);
 	_getch();
 	displayCentredText("You leave it for now and continue...", 1, true);
 }
 
 bool kitchenLevel(Character* player){
 	strVect choices;
-	choices = { "Search kitchen.", "Go for 'EXIT' corridor." };
+	choices = {"Search kitchen.", "Go for 'EXIT' corridor."};
 	while (true){
 		switch (spawnOptions(kitchen(), -9, -3, choices)){
 		case '1': findItem(player, &Knife(50)); break;
@@ -145,11 +166,13 @@ bool kitchenLevel(Character* player){
 		default: break;
 		}
 	}
+	return false;
 }
 
 void kitchenLevelEpi(){
 	clearScreen();
-	displayCentredText("You notice a strange man looking through the window.", 0, true);
+	displayCentredText("You notice a strange man looking through the window.",
+					   0, true);
 	displayCentredText("Looking again... He's not there.", 2, true);
 	displayCentredText("You immediately run for the exit.", 4, true);
 	_getch();
@@ -157,7 +180,7 @@ void kitchenLevelEpi(){
 
 bool finalLevel(Character* player, Character* guard){
 	strVect choices;
-	choices = { "Try to fight." };
+	choices = {"Try to fight."};
 	displayCentredText(guard->lineFinal(), 2, true);
 	_getch();
 	spawnOptions(guard->charAscii(true), 0, 0, choices);
@@ -187,7 +210,7 @@ bool duelOfFaith(Character* player, Character* guard){
 		if (spawnOptions(guard->charAscii(true), 0, 0, choices) == '1')
 			player->dealDamage(player->charInv["Pistol"], guard);
 		guard->dealDamage(guard->charInv["Pistol"], player);
-		std::cout << player->getHealth();
+		std::cout<<player->getHealth();
 	}
 	if (guard->getHealth() > 0)
 		return false;
@@ -209,7 +232,8 @@ void gmanEpilogue(Character* gman){
 void giveCrowbar(Character* player, Character* gman){
 	clearScreen();
 	displayCentredObject(gman->charAscii(), 0, 0);
-	displayCentredText("I see, well, here's a crowbar for Mr. Freeman then.", 0, true);
+	displayCentredText("I see, well, here's a crowbar for Mr. Freeman then.",
+						0, true);
 	_getch();
 }
 
@@ -227,7 +251,7 @@ void getCrowbar(Character* player){
 
 bool lockerLevel(Character* player, std::string lockerCode){
 	strVect choices;
-	choices = { "Open locker with code.", "Go to exit." };
+	choices = {"Open locker with code.", "Go to exit."};
 	if (player->charInv.checkForItem("Crowbar"))
 		choices.push_back("Open locker with crowbar.");
 	while (true){
@@ -238,6 +262,7 @@ bool lockerLevel(Character* player, std::string lockerCode){
 		default: break;
 		}
 	}
+	return false;
 }
 
 void openCode(Character* player, std::string code){
@@ -256,9 +281,14 @@ void openCrowbar(Character* player){
 	clearScreen();
 	if (!player->charInv.checkForItem("Pistol")){
 		displayCentredObject(locker(), 10, 11);
-		displayCentredText("You break through the lock!", 0, false);
-		_getch();
-		getGun(player);
+		if(player->openBrute(0.5)){
+			displayCentredText("You break through the lock!", 0, false);
+			_getch();
+			getGun(player);
+		}
+		else{
+
+		}
 	}
 }
 
@@ -278,7 +308,8 @@ bool goExit(Character* player){
 	if (player->charInv.checkForItem("Pistol"))
 		return true;
 	else
-		displayCentredText("Hmm... I should open this locker, Freeman thought.", 0, true);
+		displayCentredText("Hmm... I should open this locker, Freeman thought.",
+							0, true);
 	return false;
 }
 
@@ -295,7 +326,13 @@ bool checkNumbers(std::string code, Character* gman){
 }
 
 
-
+void breakEnd(){
+	displayCentredText("You try to break through the lock.", 0, true);
+	displayCentredText("Your crowbar breaks instead...", 1, true);
+	clearScreen();
+	displayCentredText("You lost...", 1, true);
+	exit(1);
+}
 void happyEnd(Character* guard){
 	clearScreen();
 	displayCentredObject(guard->charAscii(false), 0, 0);
@@ -316,7 +353,8 @@ void dead(){
 
 void getCaughtEnd(){
 	clearScreen();
-	displayCentredText("You waited too long and got caught by a patrol unit!", -5, true);
+	displayCentredText("You waited too long and got caught by a patrol unit!",
+						-5, true);
 	displayCentredText("You lost the game! :(", 1, false);
 	_getch();
 	exit(1);

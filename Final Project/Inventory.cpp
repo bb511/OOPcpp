@@ -9,28 +9,6 @@ Inventory::Inventory(Item* itm1, Item* itm2){
     items[itm2->getName()] = itm2;
 }
 
-Inventory::Inventory(Inventory& inv){
-    if(inv.getItemsNumber() != 0)
-        items = inv.getItems();
-}
-
-Inventory::Inventory(Inventory&& inv){
-    items = inv.items;
-    inv.items.clear();
-}
-
-Inventory& Inventory::operator=(Inventory& inv){
-    if(&inv == this) return *this;
-    items.clear();
-    if(inv.getItemsNumber() != 0) items = inv.getItems();
-    return *this;
-}
-
-Inventory& Inventory::operator=(Inventory&& inv){
-    items.swap(inv.items);
-    return *this;
-}
-
 bool Inventory::checkForItem(std::string itemName){
 	inventoryMap::iterator it;
 	it = items.find(itemName);

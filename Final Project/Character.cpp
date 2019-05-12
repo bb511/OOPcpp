@@ -10,8 +10,15 @@ int Character::takeDamage(size_t dmg){
 int Character::dealDamage(Item* attackItm, Character* attackedChar){
 	if (charInv.checkForItem(attackItm->getName())){
 		double charThreshold{ attackedChar->getCharAgility() };
-		size_t damageDealt{ attackItm->attack(charThreshold) };
+		size_t damageDealt{attackItm->attack(charThreshold)};
 		return attackedChar->takeDamage(damageDealt);
 	}
 	return -1;
+}
+
+bool Character::bruteOpen(Item* utilityItem, double chestThreshold){
+    if (charInv.checkForItem(utilityItem->getName())){
+        if(utilityItem->pryOpen(chestThreshold))
+            return true;
+    return false;
 }

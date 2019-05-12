@@ -2,7 +2,6 @@
 #define ITEMS_H
 
 #include "ItemTypes.h"
-#include <string>
 
 class Crowbar: public UtilityItem{
 public:

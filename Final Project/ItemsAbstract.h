@@ -1,5 +1,5 @@
-#ifndef ITEMTYPES_H
-#define ITEMTYPES_H
+#ifndef ITEMSABSTRACT_H
+#define ITEMSABSTRACT_H
 
 #include <iostream>
 #include <string>
@@ -21,21 +21,13 @@ public:
     // Functionality.
     virtual size_t attack(double)=0;
     virtual bool pryOpen(double)=0;
-
-    void changeName(str name) { itemName = name; }
-    void changeAsciiArt(str aArt) { asciiArt = aArt; }
 	virtual void changeDmgDealt(size_t dmg) {}
 	virtual void changeSMulti(double success) {}
 
     // Access functions.
     str getName() { return itemName; }
     str getAscii() { return asciiArt; }
-    
-	virtual size_t getDmgDealt() { return 0; };
-	virtual double getSMulti() { return 1; }
-	void showName() { std::cout << itemName; }
-    void showAscii() { std::cout<<asciiArt; }
-	
+
 };
 
 class DamageItem: public Item{
@@ -50,7 +42,6 @@ public:
     virtual bool pryOpen(double);
     size_t attack(double);
 	void changeDamageDealt(size_t dmg) { damageDealt = dmg; }
-    size_t getDmgDealt() { return damageDealt; }
 };
 
 class UtilityItem: public Item{
@@ -64,8 +55,7 @@ public:
     virtual ~UtilityItem() {}
     virtual size_t attack(double);
     bool pryOpen(double);
-	void changeSMulti(double s) { successMultiplier = s; }
-    double getSuccessMultiplier() { return successMultiplier; }
+    void changeSMulti(double success) { successMultiplier = success; }
 };
 
 #endif

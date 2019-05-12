@@ -46,14 +46,16 @@ std::string Gman::lineFinal(){
 }
 
 std::string Gman::linePlayer(){
-	return "You. Yes, you, the one controlling everything. I am talking to you. " \
+	return "You. Yes, you, the one controlling everything. " \
+		   "I am talking to you. " \
 		   "In the game folder you'll find and img.png file. " \
-		   "Open it in paint, draw a digit in each box and save it.    I am waiting.";
+		   "Open it in paint, draw a digit in each box and save it.       " \
+		   "I am waiting.";
 }
 
 std::string Guard::charAscii(bool boss){
 	if (!boss)
-		return  
+		return
 		"                                                  \n"
 		"                    .:+ossso+:`                   \n" \
 		"                   /mhyysyyyhdy`                  \n" \
@@ -82,31 +84,31 @@ std::string Guard::charAscii(bool boss){
 	else
 		return
 		"                                                 \n"
-		"                     ```                         \n"
-		"                 `....-----.                     \n"
-		"                .//:-:/++++++.                   \n"
-		"                :++oossoosssy/                   \n"
-		"                -dmmyhNNmmdhho+:                 \n"
-		"               +sdhNhmNhhhhMdsy.                 \n"
-		"               -mdmh/ommmdmdhhy                  \n"
-		"                `osyhhysssyyyd.                  \n"
-		"                 :yyhhysyhhhs`                   \n"
-		"                  yhdddhdhd:                     \n"
-		"                  :hhhddmdd-                     \n"
-		"                   :mmmmddho-.                   \n"
-		"                `-sdddddddhdNm/                  \n"
-		"         ```..-:hNNMNddmNNNNNMN+--.``            \n"
-		"        `-----:+NNmmNMNMMNNNNMd+:::--:`          \n"
-		"       `-::--:/oNmddmMMMmmmNNm+::::-::-.         \n"
-		"       -://:-:+yNhhhmMMNddhmNdo///////:-`        \n"
-		"       :/+/://+hdyyhNNMNhyyhNh+//////:::-        \n"
-		"       /+/+///+mdyydMNMNyyydNho/////::::-        \n"
-		"       /+/++/+oNdyhmMNNMhyydMho+//+/://:-.       \n"
-		"       /oo++//oNmddNMNMMdyhhmho++++/+/::/-       \n"
-		"       /+oso++sNmhdNNNNMdhhdmhso++oo+///::       \n"
-		"       /+oss+oyMmdmMNMMMmhdmNyso+oss++///:`      \n"
-		"                                                 \n"
-		"           YOU FACE THE FINAL GUARD!             \n";
+		"                     ```                         \n" \
+		"                 `....-----.                     \n" \
+		"                .//:-:/++++++.                   \n" \
+		"                :++oossoosssy/                   \n" \
+		"                -dmmyhNNmmdhho+:                 \n" \
+		"               +sdhNhmNhhhhMdsy.                 \n" \
+		"               -mdmh/ommmdmdhhy                  \n" \
+		"                `osyhhysssyyyd.                  \n" \
+		"                 :yyhhysyhhhs`                   \n" \
+		"                  yhdddhdhd:                     \n" \
+		"                  :hhhddmdd-                     \n" \
+		"                   :mmmmddho-.                   \n" \
+		"                `-sdddddddhdNm/                  \n" \
+		"         ```..-:hNNMNddmNNNNNMN+--.``            \n" \
+		"        `-----:+NNmmNMNMMNNNNMd+:::--:`          \n" \
+		"       `-::--:/oNmddmMMMmmmNNm+::::-::-.         \n" \
+		"       -://:-:+yNhhhmMMNddhmNdo///////:-`        \n" \
+		"       :/+/://+hdyyhNNMNhyyhNh+//////:::-        \n" \
+		"       /+/+///+mdyydMNMNyyydNho/////::::-        \n" \
+		"       /+/++/+oNdyhmMNNMhyydMho+//+/://:-.       \n" \
+		"       /oo++//oNmddNMNMMdyhhmho++++/+/::/-       \n" \
+		"       /+oso++sNmhdNNNNMdhhdmhso++oo+///::       \n" \
+		"       /+oss+oyMmdmMNMMMmhdmNyso+oss++///:`      \n" \
+		"                                                 \n" \
+		"           YOU FACE THE BOSS GUARD!              \n";
 
 }
 
@@ -123,7 +125,8 @@ std::string Guard::lineLeave(){
 }
 
 std::string Guard::lineCooperation(){
-	return "Thank you for your cooperation! I'll make sure to put in a good word!";
+	return "Thank you for your cooperation!" \
+		   "I'll make sure to put in a good word!";
 }
 
 std::string Guard::lineKnife(){

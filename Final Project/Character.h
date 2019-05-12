@@ -27,21 +27,17 @@ public:
     virtual int takeDamage(size_t dmg);
     virtual int dealDamage(Item*, Character*);
 
-	virtual std::string lineIntro() { return "..."; }
-	virtual std::string lineIntro2() { return "..."; }
-	virtual std::string lineFinal() { return "..."; }
-	virtual std::string lineAlerted() { return "..."; }
-	virtual std::string lineConfused() { return "..."; }
-	virtual std::string lineLeave()  { return "..."; }
-	virtual std::string lineCooperation() { return "..."; }
-	virtual std::string lineKnife() { return "...";  }
-	virtual std::string linePlayer() { return "..."; }
+	virtual std::string lineIntro() { return "Line not available!"; }
+	virtual std::string lineIntro2() { return "Line not available!"; }
+	virtual std::string lineFinal() { return "Line not available!"; }
+	virtual std::string lineAlerted() { return "Line not available!"; }
+	virtual std::string lineConfused() { return "Line not available!"; }
+	virtual std::string lineLeave()  { return "Line not available!"; }
+	virtual std::string lineCooperation() { return "Line not available!"; }
+	virtual std::string lineKnife() { return "Line not available!";  }
+	virtual std::string linePlayer() { return "Line not available!"; }
 
-    void addHealth(int h) { health += h; }
-    void addName(std::string nm) { name = nm; }
-    void addThreshold(double t) { agility = t; }
 	int getHealth() { return health; }
-	
     double getCharAgility() { return agility; }
 };
 
