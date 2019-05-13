@@ -64,7 +64,9 @@ void firstPart(){
 std::string lockerCode(){
 	loadNeuralNet();
 	PNGImage img("img.jpg");
-	int digitOne{0}, digitTwo{1}, digitThr{2};
+	int digitOne{NN.forwardPass(img.getGreyscalePointer(0))};
+	int digitTwo{NN.forwardPass(img.getGreyscalePointer(32))};
+	int digitThr{NN.forwardPass(img.getGreyscalePointer(63))};
 	std::ostringstream code;
 	code<<digitOne<<digitTwo<<digitThr;
 	return code.str();
