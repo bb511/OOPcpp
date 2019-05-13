@@ -9,7 +9,7 @@ int Character::takeDamage(size_t dmg){
 
 int Character::dealDamage(Item* attackItm, Character* attackedChar){
 	if (charInv.checkForItem(attackItm->getName())){
-		double charThreshold{ attackedChar->getCharAgility() };
+		double charThreshold{attackedChar->getCharAgility()};
 		size_t damageDealt{attackItm->attack(charThreshold)};
 		return attackedChar->takeDamage(damageDealt);
 	}

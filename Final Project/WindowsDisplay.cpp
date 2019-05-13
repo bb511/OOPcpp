@@ -3,7 +3,7 @@
 static int rows{0}, cols{0};
 
 void maximizeConsole(){
-    COORD screenBufferSize{ 1500, 300 };
+    COORD screenBufferSize{1500, 300};
     HANDLE consoleHandle{GetStdHandle(STD_OUTPUT_HANDLE)};
     HWND consoleWindow{GetConsoleWindow()};
 
