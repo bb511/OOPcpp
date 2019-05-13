@@ -191,7 +191,7 @@ void readArrayFromFile(std::array<double, SIZE>& arr, std::ifstream& file){
     // Small helper function that reads an exported neural network from a file.
     std::string line; getline(file, line);
     std::istringstream strstream(line);
-    for(size_t idx; idx < arr.size(); idx++) strstream>>arr[idx];
+    for(size_t idx=0; idx < arr.size(); idx++) strstream>>arr[idx];
     if(strstream.peek() != ' ')
         std::cout<<"Dimensions of import NN do not correspond to assigned NN!\n";
 }

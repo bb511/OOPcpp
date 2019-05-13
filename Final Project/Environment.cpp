@@ -1,3 +1,4 @@
+// Stores all the environment ASCII art for easier use.
 #include "Environment.h"
 
 std::string cellDoorOpen(){

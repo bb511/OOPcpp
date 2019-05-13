@@ -1,3 +1,4 @@
+// Class that represents a characters inventory in a text based adventure game.
 #ifndef INVENTORY_H
 #define INVENTORY_H
 

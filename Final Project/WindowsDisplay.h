@@ -1,10 +1,15 @@
+// Display of the text based adventure game.
+// This is kept in a separate file and not included in the game classes
+// since it is platform specific (windows only).
 #ifndef WINDOWSDISPLAY_H
 #define WINDOWSDISPLAY_H
 
 #include <conio.h>
+#include <iostream>
 #include <iomanip>
 #include <windows.h>
 #include <string>
+#include <vector>
 
 void maximizeConsole();
 void getConsoleSize();

@@ -43,6 +43,7 @@ void dispEpochAccuracy(const MNISTData& trainingData, const MNISTData& testData)
 
 void trainOneEpoch(const MNISTData& trData, const MNISTData& tstData,
                    size_t epoch){
+    // Feed neural network the data for one iteration.
     std::cout<<"Epoch "<<epoch+1<<": ";
     dispEpochAccuracy(trData, tstData);
     neuralNet.train(trData, batchSize, learningRate);

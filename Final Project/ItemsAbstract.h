@@ -1,3 +1,4 @@
+// Base item classes. All items in the game are derived from these classes.
 #ifndef ITEMSABSTRACT_H
 #define ITEMSABSTRACT_H
 
@@ -8,6 +9,7 @@
 typedef std::string str;
 
 class Item{
+// Abstract base class containing functionality that all items should have.
 protected:
     str itemName;
     str asciiArt;
@@ -31,12 +33,15 @@ public:
 };
 
 class DamageItem: public Item{
+// Base class for items that are mainly used to deal damage.
 protected:
     size_t damageDealt;
 public:
+    // Constructors and destructor.
     DamageItem(): Item(), damageDealt(0) {}
     DamageItem(str name, str aArt, size_t damage):
         Item(name, aArt) { damageDealt = damage; }
+    // Functionality
 	virtual DamageItem* Clone() const { return new DamageItem(*this); }
     virtual ~DamageItem() {}
     virtual bool pryOpen(double);
@@ -45,12 +50,15 @@ public:
 };
 
 class UtilityItem: public Item{
+// Base class for items that are mainly used to unlock environment objects.
 protected:
     double successMultiplier;
 public:
+    // Constructors and destructor.
     UtilityItem(): Item(), successMultiplier(0) {}
     UtilityItem(str name, str aArt, double success):
         Item(name, aArt) { successMultiplier = success; }
+    // Functionality.
 	virtual UtilityItem* Clone() const { return new UtilityItem(*this); }
     virtual ~UtilityItem() {}
     virtual size_t attack(double);

@@ -1,5 +1,5 @@
 /*
-Class that handle png image processing using the lodepng decoder.
+Class that handles png image processing using the lodepng decoder.
 Once the image is processed, a grey scale equivalent is automatically generated.
 The unsigned type is imposed by the png decoder.
 The lodepng decoder is an external library from https://lodev.org/lodepng/.

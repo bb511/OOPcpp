@@ -1,3 +1,4 @@
+// Method implementation of all items in the adventure game.
 #include "Items.h"
 #include "Utility.h"
 
@@ -22,6 +23,8 @@ Crowbar::Crowbar(double successMultiplier):
 {}
 
 size_t Crowbar::attack(double threshold){
+    // Grant crowbar ability to deal damage.
+    // Utility items cannot deal damage naturally.
     double roll{generateRandomNumber()};
     if(roll > threshold + 0.1){
         std::cout<<"You hit and deal 5 damage.\n";
@@ -51,6 +54,7 @@ Knife::Knife(size_t damage):
 {}
 
 bool Knife::pryOpen(double threshold){
+    // Grant Knife ability to unlock environment objects in the game.
     double roll{generateRandomNumber()};
     if(roll > threshold + 0.1)
         return true;

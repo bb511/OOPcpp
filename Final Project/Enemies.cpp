@@ -1,3 +1,4 @@
+// Implementation of methods for enemy characters.
 #include "Enemies.h"
 
 std::string Gman::charAscii(){
@@ -49,8 +50,8 @@ std::string Gman::linePlayer(){
 	return "You. Yes, you, the one controlling everything. " \
 		   "I am talking to you. " \
 		   "In the game folder you'll find and img.png file. " \
-		   "Open it in paint, draw a digit in each box and save it.       " \
-		   "I am waiting.";
+		   "Open it in paint, draw a digit in each box and save it before proceeding. " \
+		   "(Use thin brush in paint.)";
 }
 
 std::string Guard::charAscii(bool boss){

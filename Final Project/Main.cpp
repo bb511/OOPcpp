@@ -1,3 +1,11 @@
+/*
+Title: Freeman escapes prison
+Author: Patrick Odagiu
+
+Simple text based adventure game where a neural network is implemented to
+add to the player experience. The player is presented with choices in each
+level and he must choose wisely to win.
+*/
 #include <iostream>
 #include <stdexcept>
 #include "NeuralNetwork/neuralNet.h"
@@ -5,6 +13,9 @@
 
 #include "WindowsDisplay.h"
 #include "Character.h"
+#include "Enemies.h"
+#include "Items.h"
+#include "Environment.h"
 #include "Utility.h"
 
 #include "Levels.h"
@@ -26,6 +37,7 @@ void loadNeuralNet(){
 }
 
 bool gameIntro(){
+	// The intro screen to the game.
 	char choice;
 	displayCentredObject(gman.charAscii(),0,0);
 	displayCentredText(gman.lineIntro(), 0, true);
@@ -37,6 +49,7 @@ bool gameIntro(){
 }
 
 bool closedDoor(){
+	// The game begins with instructions for the player.
 	char userInput;
 	clearScreen();
 	displayCentredObject(cellDoorClosed(),14,8);
@@ -44,7 +57,7 @@ bool closedDoor(){
 					   0, true);
 	displayCentredText("Today is the day you escape. You have 5 minutes to"
 					   "do so.", 1, true);
-	displayCentredText("Use the numbers on your keyboard to make choices.",
+	displayCentredText("Use the numbers on your keyboard (1-9) to make choices.",
 					   2, true);
 	displayCentredText("The clock is ticking (top right).", 3, true);
 	displayCentredText("[ENTER] Escape!", 7, false);
@@ -54,35 +67,43 @@ bool closedDoor(){
 }
 
 void firstPart(){
-	if(!cellLevel(&mainChar, &barney)) throw runtime_error("Cell level error!");
-	if(!corridorLevel(&mainChar)) throw runtime_error("Corridor level error!");
-	if(!kitchenLevel(&mainChar)) throw runtime_error("Kitchen level error!");
-	if(!finalLevel(&mainChar, &adrian)) throw runtime_error("Final level error!");
+	// The first part of the game. At the end, the main character always dies.
+	if(!cellLevel(&mainChar, &barney)) throw std::runtime_error("Cell level error!");
+	if(!corridorLevel(&mainChar)) throw std::runtime_error("Corridor level error!");
+	if(!kitchenLevel(&mainChar)) throw std::runtime_error("Kitchen level error!");
+	if(!finalLevel(&mainChar, &adrian)) throw std::runtime_error("Final level error!");
 	gmanEpilogue(&gman);
 }
 
 std::string lockerCode(){
+	// The locker code is read from the gameImg.png file that is supposed to be
+	// edited by the player given instructions in the game.
 	loadNeuralNet();
-	PNGImage img("img.jpg");
-	int digitOne{NN.forwardPass(img.getGreyscalePointer(0))};
-	int digitTwo{NN.forwardPass(img.getGreyscalePointer(32))};
-	int digitThr{NN.forwardPass(img.getGreyscalePointer(63))};
+	PNGImage img("gameImg.png");
+	int digitOne{NN.forwardPass(img.getGreyScalePointer(0))};
+	int digitTwo{NN.forwardPass(img.getGreyScalePointer(32))};
+	int digitThr{NN.forwardPass(img.getGreyScalePointer(64))};
 	std::ostringstream code;
 	code<<digitOne<<digitTwo<<digitThr;
 	return code.str();
 }
 
 void secondPart(std::string code){
+	// The second part of the game. The true ending is achieved here.
 	if (!checkNumbers(code, &gman))
 		giveCrowbar(&mainChar, &gman);
-	if(!lockerLevel(&mainChar, code)) throw runtime_error("Locker level error!");
-	if(!finalLevel(&mainChar, &adrian)) throw runtime_error("Final level error!");
+	if(!lockerLevel(&mainChar, code)) throw std::runtime_error("Locker level error!");
+	if(!finalLevel(&mainChar, &adrian)) throw std::runtime_error("Final level error!");
 }
 
 int main(){
+	// Implementation of text based adventure game using neural network.
 	maximizeConsole(); getConsoleSize();
 	if (!gameIntro()) return 0;
+	// Start the timer.
 	auto future{std::async(timer)};
+
+	// Start the game.
 	while (closedDoor());
 	firstPart();
 	std::string code{lockerCode()};

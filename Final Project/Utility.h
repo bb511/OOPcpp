@@ -1,3 +1,4 @@
+// Utility methods used throughout the code.
 #ifndef UTILITY_H
 #define UTILITY_H
 

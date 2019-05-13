@@ -1,3 +1,5 @@
+// Levels for the current iteration of the game.
+// These can be played with any character.
 #ifndef LEVELS_H
 #define LEVELS_H
 
@@ -5,11 +7,11 @@
 #include <conio.h>
 #include <algorithm>
 
-
 typedef std::vector <std::string> strVect;
 typedef Character Cha;
 
-char spawnOptions(std::string env, size_t paddH, size_t paddW, rVect choices);
+
+char spawnOptions(std::string env, size_t paddH, size_t paddW, strVect choices);
 void findItem(Cha* player, Item* itm);
 bool checkForCellGuard(strVect &choices, Cha* guard);
 
@@ -45,8 +47,10 @@ void openCrowbar(Cha* player);
 void getGun(Cha* player);
 bool goExit(Cha* player);
 
-
-bool happyEnd(Character* guard);
+void dead();
+void breakEnd();
+void bloodyEnd();
+void happyEnd(Character* guard);
 void getCaughtEnd();
 void bloodyEnd();
 

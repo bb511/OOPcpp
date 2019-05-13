@@ -1,3 +1,5 @@
+// Stores all the environment ASCII art. Returns environment ASCII as
+// strings when called.
 #ifndef ENVIRONMENT_H
 #define ENVIRONMENT_H
 
