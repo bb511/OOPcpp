@@ -4,13 +4,13 @@
 
 Inventory::Inventory(Item* itm1){
     // Parametrized constructor that adds one item.
-    items[itm1->getName()] = itm1;
+	items[itm1->getName()] = itm1->Clone();
 }
 
 Inventory::Inventory(Item* itm1, Item* itm2){
     // Parametrized constructor that adds two items.
-    items[itm1->getName()] = itm1;
-    items[itm2->getName()] = itm2;
+	items[itm1->getName()] = itm1->Clone();
+	items[itm2->getName()] = itm2->Clone();
 }
 
 bool Inventory::checkForItem(std::string itemName){

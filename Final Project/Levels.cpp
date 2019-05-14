@@ -103,14 +103,21 @@ void attackGuard(strVect &choices, Character* player, Character* guard,
 	// The attack guard choice in the cell level.
 	// If guard was missed three times, the guard strikes back.
 	clearScreen();
-	if (checkForCellGuard(choices, guard))
-		if (player->dealDamage(player->charInv["Pen"], guard) == 1)
-			displayCentredText("You killed the guard with the pen!", 0, false);
-		else{
-			missSwing(guard);
-			guardRiposte(guard, player, angry);
-			angry++;
+	if (checkForCellGuard(choices, guard)){
+		if (player->charInv.checkForItem("Pen")){
+			if (player->dealDamage(player->charInv["Pen"], guard) == 1)
+				displayCentredText("You killed the guard with the pen!", 0, false);
+			else{
+				missSwing(guard);
+				guardRiposte(guard, player, angry);
+				angry++;
+			}
 		}
+		else{
+			clearScreen();
+			displayCentredText("You don't have anything to attack the guard with!", 0, true);
+		}
+	}
 	else if (guard->getHealth() < 0)
 		displayCentredText(guard->charName() + " is already dead.", 0, false);
 	_getch();
@@ -227,10 +234,14 @@ bool duelOfFaith(Character* player, Character* guard){
 	// If the player has the pistol in the final showdown, the guard and the
 	// player duel, only one of them walking alive.
 	strVect choices;
-	choices = { "Shoot guard.", "Wait." };
+	choices = {"Shoot guard again.", "Wait."};
 	while (player->getHealth() > 0 && guard->getHealth() > 0){
-		if (spawnOptions(guard->charAscii(true), 0, 0, choices) == '1')
+		if (spawnOptions(guard->charAscii(true), 0, 0, choices) == '1'){
+			clearScreen();
+			displayCentredText("You shoot the guard!", 0, false);
+			_getch();
 			player->dealDamage(player->charInv["Pistol"], guard);
+		}
 		guard->dealDamage(guard->charInv["Pistol"], player);
 		std::cout<<player->getHealth();
 	}

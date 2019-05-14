@@ -48,10 +48,10 @@ std::string Gman::lineFinal(){
 
 std::string Gman::linePlayer(){
 	return "You. Yes, you, the one controlling everything. " \
-		   "I am talking to you. " \
-		   "In the game folder you'll find and img.png file. " \
+		   "DO NOT PRESS ANYTHING. I am talking to you. " \
+		   "In the game folder you'll find and gameImg.png file. " \
 		   "Open it in paint, draw a digit in each box and save it before proceeding. " \
-		   "(Use thin brush in paint.)";
+		   "PRESS ENTER AFTER EDITING THE FILE. (Use thin brush in paint.)";
 }
 
 std::string Guard::charAscii(bool boss){
